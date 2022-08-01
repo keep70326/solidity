@@ -1,17 +1,17 @@
 pragma solidity ^0.4.24;
 
-contract class30{
+contract basic{
 
     address public owner;
     uint public integer_1;
 
-    constructor() public{
-    owner = msg.sender;
-    integer_1 = 0;
+    constructor(){
+        owner = msg.sender;
+        integer_1 = 0;
     }
 
     modifier onlyOwner{
-        require(msg.sender != owner);
+        require(msg.sender == owner);
         _;
     }
 
@@ -19,3 +19,4 @@ contract class30{
         integer_1 += x;
     }
 }
+
