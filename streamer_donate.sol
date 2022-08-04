@@ -4,8 +4,8 @@ contract Donation{
 
     event logDonate(address streamer, address donor, string nickname, uint value, string message);
 
-    function donate(address streamer, string nickname, string message) public payable{
-        streamer.transfer(msg.value);
-        emit logDonate(streamer, msg.sender, nickname, msg.value, message);
+    function donate(address _streamer, string _nickname, string _message) public payable{
+        _streamer.transfer(msg.value);
+        emit logDonate(_streamer, msg.sender, _nickname, msg.value, _message);
     }
 }
