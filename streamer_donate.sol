@@ -23,12 +23,12 @@ contract Donate{
         emit logDonate(_streamer, msg.sender, _nickname, msg.value, _message);
     }
     
-    //實況主呼叫方法查詢乾爹名單
+    //實況主呼叫方法查詢乾爹人數
     function getDonorList() public view returns(address[]){ 
         return (donationHistory[msg.sender].donors);
     }
 
-    //實況主呼叫方法查詢乾爹明細
+    //實況主呼叫方法查詢各乾爹抖內多少
     event logListDonorInfo(address streamer, address donors, uint value);
     function listDonorInfo() public {
         for (uint i=0; i < donationHistory[msg.sender].donors.length; i++){
