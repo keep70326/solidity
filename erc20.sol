@@ -6,8 +6,12 @@ import './IERC20.sol';
 contract ERC20 is IERC20{
     using SafeMath for uint256;
 
+    string public constant name = 'meme token';
+    uint8 public constant decimals = 18;
+    string public constant symbol = 'MET';
+
     uint256 private _totalSuplly;
-    mapping(address => uint) balance;
+    mapping(address => uint) _balance;
     mapping(address => mapping(address=>uint)) _approve; //授權的tokens
 
     // 所有存在的 Token 數量
@@ -18,7 +22,7 @@ contract ERC20 is IERC20{
     // 讀取 tokenOwner 這個 address 所持有的 Token 數量
     //address => uint
     function balanceOf(address tokenOwner) external view returns (uint256 balance){
-
+        return _balance[tokenOwner];
     }
     
     // 從 msg.sender 轉 tokens 個 Token 給 to 這個 address
@@ -46,10 +50,10 @@ contract ERC20 is IERC20{
         return _transfer(from, to, tokens);
     }
 
-    function _transfer(address form, address to, uint256 tokens) internal returns (bool success){
-        balance[from] = balance[from].sub(tokens);
-        balance[to] = balance[to].add(tokens);
-        emit Transfer(fron, to, tokens);
+    function _transfer(address from, address to, uint256 tokens) internal returns (bool success){
+        _balance[from] = _balance[from].sub(tokens);
+        _balance[to] = _balance[to].add(tokens);
+        emit Transfer(from, to, tokens);
         return (true);
     }
 }
