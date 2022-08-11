@@ -82,8 +82,8 @@ contract MiningShare{
         uint totalMined = totalWithdraw.add(address(this).balance);//挖礦總收益
         //還有多少可領 = 挖礦總收益 *（投資金額 / 總投資金額）- 已經領多少
         uint userCanWithdraw = totalMined.mul(usersNTD[msg.sender].div(totalNTD)).sub(userWithdraw[msg.sender]);
-        userWithdraw[msg.sender].add(userCanWithdraw); //總提款金額 ＝ 本金＋還有多少可領
-        totalWithdraw.add(userCanWithdraw); //被提款總金額 = 被提款金額＋這次提款金額
+        userWithdraw[msg.sender] = userWithdraw[msg.sender].add(userCanWithdraw); //總提款金額 ＝ 本金＋還有多少可領
+        totalWithdraw = totalWithdraw.add(userCanWithdraw); //被提款總金額 = 被提款金額＋這次提款金額
         msg.sender.transfer(userCanWithdraw);
     }
 }
