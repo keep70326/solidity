@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import './SafeMath.sol';
 import './IERC20.sol';
 
-contract ICOToken is IERC20{
+contract ERC20 is IERC20{
     using SafeMath for uint256;
 
     string public constant name = 'meme token';
