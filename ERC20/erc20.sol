@@ -3,20 +3,20 @@ pragma solidity ^0.4.24;
 import './SafeMath.sol';
 import './IERC20.sol';
 
-contract ERC20 is IERC20{
+contract ICOToken is IERC20{
     using SafeMath for uint256;
 
     string public constant name = 'meme token';
     uint8 public constant decimals = 18;
     string public constant symbol = 'MET';
 
-    uint256 private _totalSuplly;
+    uint256 private _totalSupply;
     mapping(address => uint) _balance;
-    mapping(address => mapping(address=>uint)) _approve; //授權的tokens
+    mapping(address => mapping(address=>uint256)) _approve; //授權的tokens
 
     // 所有存在的 Token 數量
     function totalSupply() external view returns (uint256){
-        return _totalSuplly;
+        return _totalSupply;
     }
     
     // 讀取 tokenOwner 這個 address 所持有的 Token 數量
