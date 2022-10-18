@@ -83,13 +83,13 @@ interface IERC20 {
 }
 
 interface IFlashLoanReceiver {
-  function executeOperation(
-    address[] calldata assets,
-    uint256[] calldata amounts,
-    uint256[] calldata premiums,
-    address initiator,
-    bytes calldata params
-  ) external returns (bool);
+    function executeOperation(
+        address[] calldata assets,
+        uint256[] calldata amounts,
+        uint256[] calldata premiums,
+        address initiator,
+        bytes calldata params
+    ) external returns (bool);
 }
 
 /**
@@ -100,54 +100,54 @@ interface IFlashLoanReceiver {
  * @author Aave
  **/
 interface ILendingPoolAddressesProvider {
-  event MarketIdSet(string newMarketId);
-  event LendingPoolUpdated(address indexed newAddress);
-  event ConfigurationAdminUpdated(address indexed newAddress);
-  event EmergencyAdminUpdated(address indexed newAddress);
-  event LendingPoolConfiguratorUpdated(address indexed newAddress);
-  event LendingPoolCollateralManagerUpdated(address indexed newAddress);
-  event PriceOracleUpdated(address indexed newAddress);
-  event LendingRateOracleUpdated(address indexed newAddress);
-  event ProxyCreated(bytes32 id, address indexed newAddress);
-  event AddressSet(bytes32 id, address indexed newAddress, bool hasProxy);
+    event MarketIdSet(string newMarketId);
+    event LendingPoolUpdated(address indexed newAddress);
+    event ConfigurationAdminUpdated(address indexed newAddress);
+    event EmergencyAdminUpdated(address indexed newAddress);
+    event LendingPoolConfiguratorUpdated(address indexed newAddress);
+    event LendingPoolCollateralManagerUpdated(address indexed newAddress);
+    event PriceOracleUpdated(address indexed newAddress);
+    event LendingRateOracleUpdated(address indexed newAddress);
+    event ProxyCreated(bytes32 id, address indexed newAddress);
+    event AddressSet(bytes32 id, address indexed newAddress, bool hasProxy);
 
-  function getMarketId() external view returns (string memory);
+    function getMarketId() external view returns (string memory);
 
-  function setMarketId(string calldata marketId) external;
+    function setMarketId(string calldata marketId) external;
 
-  function setAddress(bytes32 id, address newAddress) external;
+    function setAddress(bytes32 id, address newAddress) external;
 
-  function setAddressAsProxy(bytes32 id, address impl) external;
+    function setAddressAsProxy(bytes32 id, address impl) external;
 
-  function getAddress(bytes32 id) external view returns (address);
+    function getAddress(bytes32 id) external view returns (address);
 
-  function getLendingPool() external view returns (address);
+    function getLendingPool() external view returns (address);
 
-  function setLendingPoolImpl(address pool) external;
+    function setLendingPoolImpl(address pool) external;
 
-  function getLendingPoolConfigurator() external view returns (address);
+    function getLendingPoolConfigurator() external view returns (address);
 
-  function setLendingPoolConfiguratorImpl(address configurator) external;
+    function setLendingPoolConfiguratorImpl(address configurator) external;
 
-  function getLendingPoolCollateralManager() external view returns (address);
+    function getLendingPoolCollateralManager() external view returns (address);
 
-  function setLendingPoolCollateralManager(address manager) external;
+    function setLendingPoolCollateralManager(address manager) external;
 
-  function getPoolAdmin() external view returns (address);
+    function getPoolAdmin() external view returns (address);
 
-  function setPoolAdmin(address admin) external;
+    function setPoolAdmin(address admin) external;
 
-  function getEmergencyAdmin() external view returns (address);
+    function getEmergencyAdmin() external view returns (address);
 
-  function setEmergencyAdmin(address admin) external;
+    function setEmergencyAdmin(address admin) external;
 
-  function getPriceOracle() external view returns (address);
+    function getPriceOracle() external view returns (address);
 
-  function setPriceOracle(address priceOracle) external;
+    function setPriceOracle(address priceOracle) external;
 
-  function getLendingRateOracle() external view returns (address);
+    function getLendingRateOracle() external view returns (address);
 
-  function setLendingRateOracle(address lendingRateOracle) external;
+    function setLendingRateOracle(address lendingRateOracle) external;
 }
 
 interface ILendingPool {
@@ -159,13 +159,14 @@ interface ILendingPool {
    * @param amount The amount deposited
    * @param referral The referral code used
    **/
-  event Deposit(
-    address indexed reserve,
-    address user,
-    address indexed onBehalfOf,
-    uint256 amount,
-    uint16 indexed referral
-  );
+    
+    event Deposit(
+        address indexed reserve,
+        address user,
+        address indexed onBehalfOf,
+        uint256 amount,
+        uint16 indexed referral
+    );
 
   /**
    * @dev Emitted on withdraw()
@@ -174,7 +175,7 @@ interface ILendingPool {
    * @param to Address that will receive the underlying
    * @param amount The amount to be withdrawn
    **/
-  event Withdraw(address indexed reserve, address indexed user, address indexed to, uint256 amount);
+    event Withdraw(address indexed reserve, address indexed user, address indexed to, uint256 amount);
 
   /**
    * @dev Emitted on borrow() and flashLoan() when debt needs to be opened
@@ -187,14 +188,14 @@ interface ILendingPool {
    * @param borrowRate The numeric rate at which the user has borrowed
    * @param referral The referral code used
    **/
-  event Borrow(
-    address indexed reserve,
-    address user,
-    address indexed onBehalfOf,
-    uint256 amount,
-    uint256 borrowRateMode,
-    uint256 borrowRate,
-    uint16 indexed referral
+    event Borrow(
+        address indexed reserve,
+        address user,
+        address indexed onBehalfOf,
+        uint256 amount,
+        uint256 borrowRateMode,
+        uint256 borrowRate,
+        uint16 indexed referral
   );
 
   /**
@@ -204,12 +205,12 @@ interface ILendingPool {
    * @param repayer The address of the user initiating the repay(), providing the funds
    * @param amount The amount repaid
    **/
-  event Repay(
-    address indexed reserve,
-    address indexed user,
-    address indexed repayer,
-    uint256 amount
-  );
+    event Repay(
+        address indexed reserve,
+        address indexed user,
+        address indexed repayer,
+        uint256 amount
+    );
 
   /**
    * @dev Emitted on swapBorrowRateMode()
@@ -217,28 +218,28 @@ interface ILendingPool {
    * @param user The address of the user swapping his rate mode
    * @param rateMode The rate mode that the user wants to swap to
    **/
-  event Swap(address indexed reserve, address indexed user, uint256 rateMode);
+    event Swap(address indexed reserve, address indexed user, uint256 rateMode);
 
   /**
    * @dev Emitted on setUserUseReserveAsCollateral()
    * @param reserve The address of the underlying asset of the reserve
    * @param user The address of the user enabling the usage as collateral
    **/
-  event ReserveUsedAsCollateralEnabled(address indexed reserve, address indexed user);
+    event ReserveUsedAsCollateralEnabled(address indexed reserve, address indexed user);
 
   /**
    * @dev Emitted on setUserUseReserveAsCollateral()
    * @param reserve The address of the underlying asset of the reserve
    * @param user The address of the user enabling the usage as collateral
    **/
-  event ReserveUsedAsCollateralDisabled(address indexed reserve, address indexed user);
+    event ReserveUsedAsCollateralDisabled(address indexed reserve, address indexed user);
 
   /**
    * @dev Emitted on rebalanceStableBorrowRate()
    * @param reserve The address of the underlying asset of the reserve
    * @param user The address of the user for which the rebalance has been executed
    **/
-  event RebalanceStableBorrowRate(address indexed reserve, address indexed user);
+    event RebalanceStableBorrowRate(address indexed reserve, address indexed user);
 
   /**
    * @dev Emitted on flashLoan()
@@ -249,24 +250,24 @@ interface ILendingPool {
    * @param premium The fee flash borrowed
    * @param referralCode The referral code used
    **/
-  event FlashLoan(
-    address indexed target,
-    address indexed initiator,
-    address indexed asset,
-    uint256 amount,
-    uint256 premium,
-    uint16 referralCode
-  );
+    event FlashLoan(
+        address indexed target,
+        address indexed initiator,
+        address indexed asset,
+        uint256 amount,
+        uint256 premium,
+        uint16 referralCode
+    );
 
   /**
    * @dev Emitted when the pause is triggered.
    */
-  event Paused();
+    event Paused();
 
   /**
    * @dev Emitted when the pause is lifted.
    */
-  event Unpaused();
+    event Unpaused();
 
   /**
    * @dev Emitted when a borrower is liquidated. This event is emitted by the LendingPool via
@@ -281,15 +282,15 @@ interface ILendingPool {
    * @param receiveAToken `true` if the liquidators wants to receive the collateral aTokens, `false` if he wants
    * to receive the underlying collateral asset directly
    **/
-  event LiquidationCall(
-    address indexed collateralAsset,
-    address indexed debtAsset,
-    address indexed user,
-    uint256 debtToCover,
-    uint256 liquidatedCollateralAmount,
-    address liquidator,
-    bool receiveAToken
-  );
+    event LiquidationCall(
+        address indexed collateralAsset,
+        address indexed debtAsset,
+        address indexed user,
+        uint256 debtToCover,
+        uint256 liquidatedCollateralAmount,
+        address liquidator,
+        bool receiveAToken
+    );
 
   /**
    * @dev Emitted when the state of a reserve is updated. NOTE: This event is actually declared
@@ -303,14 +304,14 @@ interface ILendingPool {
    * @param liquidityIndex The new liquidity index
    * @param variableBorrowIndex The new variable borrow index
    **/
-  event ReserveDataUpdated(
-    address indexed reserve,
-    uint256 liquidityRate,
-    uint256 stableBorrowRate,
-    uint256 variableBorrowRate,
-    uint256 liquidityIndex,
-    uint256 variableBorrowIndex
-  );
+    event ReserveDataUpdated(
+        address indexed reserve,
+        uint256 liquidityRate,
+        uint256 stableBorrowRate,
+        uint256 variableBorrowRate,
+        uint256 liquidityIndex,
+        uint256 variableBorrowIndex
+    );
 
   /**
    * @dev Deposits an `amount` of underlying asset into the reserve, receiving in return overlying aTokens.
@@ -323,12 +324,12 @@ interface ILendingPool {
    * @param referralCode Code used to register the integrator originating the operation, for potential rewards.
    *   0 if the action is executed directly by the user, without any middle-man
    **/
-  function deposit(
-    address asset,
-    uint256 amount,
-    address onBehalfOf,
-    uint16 referralCode
-  ) external;
+    function deposit(
+        address asset,
+        uint256 amount,
+        address onBehalfOf,
+        uint16 referralCode
+    ) external;
 
   /**
    * @dev Withdraws an `amount` of underlying asset from the reserve, burning the equivalent aTokens owned
@@ -341,11 +342,11 @@ interface ILendingPool {
    *   different wallet
    * @return The final amount withdrawn
    **/
-  function withdraw(
-    address asset,
-    uint256 amount,
-    address to
-  ) external returns (uint256);
+    function withdraw(
+        address asset,
+        uint256 amount,
+        address to
+    ) external returns (uint256);
 
   /**
    * @dev Allows users to borrow a specific `amount` of the reserve underlying asset, provided that the borrower
@@ -362,13 +363,13 @@ interface ILendingPool {
    * calling the function if he wants to borrow against his own collateral, or the address of the credit delegator
    * if he has been given credit delegation allowance
    **/
-  function borrow(
-    address asset,
-    uint256 amount,
-    uint256 interestRateMode,
-    uint16 referralCode,
-    address onBehalfOf
-  ) external;
+    function borrow(
+        address asset,
+        uint256 amount,
+        uint256 interestRateMode,
+        uint16 referralCode,
+        address onBehalfOf
+    ) external;
 
   /**
    * @notice Repays a borrowed `amount` on a specific reserve, burning the equivalent debt tokens owned
@@ -382,19 +383,19 @@ interface ILendingPool {
    * other borrower whose debt should be removed
    * @return The final amount repaid
    **/
-  function repay(
-    address asset,
-    uint256 amount,
-    uint256 rateMode,
-    address onBehalfOf
-  ) external returns (uint256);
+    function repay(
+        address asset,
+        uint256 amount,
+        uint256 rateMode,
+        address onBehalfOf
+    ) external returns (uint256);
 
   /**
    * @dev Allows a borrower to swap his debt between stable and variable mode, or viceversa
    * @param asset The address of the underlying asset borrowed
    * @param rateMode The rate mode that the user wants to swap to
    **/
-  function swapBorrowRateMode(address asset, uint256 rateMode) external;
+    function swapBorrowRateMode(address asset, uint256 rateMode) external;
 
   /**
    * @dev Rebalances the stable interest rate of a user to the current stable rate defined on the reserve.
@@ -405,14 +406,14 @@ interface ILendingPool {
    * @param asset The address of the underlying asset borrowed
    * @param user The address of the user to be rebalanced
    **/
-  function rebalanceStableBorrowRate(address asset, address user) external;
+    function rebalanceStableBorrowRate(address asset, address user) external;
 
   /**
    * @dev Allows depositors to enable/disable a specific deposited asset as collateral
    * @param asset The address of the underlying asset deposited
    * @param useAsCollateral `true` if the user wants to use the deposit as collateral, `false` otherwise
    **/
-  function setUserUseReserveAsCollateral(address asset, bool useAsCollateral) external;
+    function setUserUseReserveAsCollateral(address asset, bool useAsCollateral) external;
 
   /**
    * @dev Function to liquidate a non-healthy position collateral-wise, with Health Factor below 1
@@ -425,13 +426,13 @@ interface ILendingPool {
    * @param receiveAToken `true` if the liquidators wants to receive the collateral aTokens, `false` if he wants
    * to receive the underlying collateral asset directly
    **/
-  function liquidationCall(
-    address collateralAsset,
-    address debtAsset,
-    address user,
-    uint256 debtToCover,
-    bool receiveAToken
-  ) external;
+    function liquidationCall(
+        address collateralAsset,
+        address debtAsset,
+        address user,
+        uint256 debtToCover,
+        bool receiveAToken
+    ) external;
 
   /**
    * @dev Allows smartcontracts to access the liquidity of the pool within one transaction,
@@ -450,15 +451,15 @@ interface ILendingPool {
    * @param referralCode Code used to register the integrator originating the operation, for potential rewards.
    *   0 if the action is executed directly by the user, without any middle-man
    **/
-  function flashLoan(
-    address receiverAddress,
-    address[] calldata assets,
-    uint256[] calldata amounts,
-    uint256[] calldata modes,
-    address onBehalfOf,
-    bytes calldata params,
-    uint16 referralCode
-  ) external;
+    function flashLoan(
+        address receiverAddress,
+        address[] calldata assets,
+        uint256[] calldata amounts,
+        uint256[] calldata modes,
+        address onBehalfOf,
+        bytes calldata params,
+        uint16 referralCode
+    ) external;
 
   /**
    * @dev Returns the user account data across all the reserves
@@ -470,86 +471,86 @@ interface ILendingPool {
    * @return ltv the loan to value of the user
    * @return healthFactor the current health factor of the user
    **/
-  function getUserAccountData(address user)
-    external
-    view
-    returns (
-      uint256 totalCollateralETH,
-      uint256 totalDebtETH,
-      uint256 availableBorrowsETH,
-      uint256 currentLiquidationThreshold,
-      uint256 ltv,
-      uint256 healthFactor
-    );
+    function getUserAccountData(address user)
+        external
+        view
+        returns (
+        uint256 totalCollateralETH,
+        uint256 totalDebtETH,
+        uint256 availableBorrowsETH,
+        uint256 currentLiquidationThreshold,
+        uint256 ltv,
+        uint256 healthFactor
+        );
 
-  function initReserve(
-    address reserve,
-    address aTokenAddress,
-    address stableDebtAddress,
-    address variableDebtAddress,
-    address interestRateStrategyAddress
-  ) external;
+    function initReserve(
+        address reserve,
+        address aTokenAddress,
+        address stableDebtAddress,
+        address variableDebtAddress,
+        address interestRateStrategyAddress
+    ) external;
 
-  function setReserveInterestRateStrategyAddress(address reserve, address rateStrategyAddress)
-    external;
+    function setReserveInterestRateStrategyAddress(address reserve, address rateStrategyAddress)
+        external;
 
-  function setConfiguration(address reserve, uint256 configuration) external;
+    function setConfiguration(address reserve, uint256 configuration) external;
 
   /**
    * @dev Returns the configuration of the reserve
    * @param asset The address of the underlying asset of the reserve
    * @return The configuration of the reserve
    **/
-  function getConfiguration(address asset)
-    external
-    view
-    returns (DataTypes.ReserveConfigurationMap memory);
+    function getConfiguration(address asset)
+        external
+        view
+        returns (DataTypes.ReserveConfigurationMap memory);
 
   /**
    * @dev Returns the configuration of the user across all the reserves
    * @param user The user address
    * @return The configuration of the user
    **/
-  function getUserConfiguration(address user)
-    external
-    view
-    returns (DataTypes.UserConfigurationMap memory);
+    function getUserConfiguration(address user)
+        external
+        view
+        returns (DataTypes.UserConfigurationMap memory);
 
   /**
    * @dev Returns the normalized income normalized income of the reserve
    * @param asset The address of the underlying asset of the reserve
    * @return The reserve's normalized income
    */
-  function getReserveNormalizedIncome(address asset) external view returns (uint256);
+    function getReserveNormalizedIncome(address asset) external view returns (uint256);
 
   /**
    * @dev Returns the normalized variable debt per unit of asset
    * @param asset The address of the underlying asset of the reserve
    * @return The reserve normalized variable debt
    */
-  function getReserveNormalizedVariableDebt(address asset) external view returns (uint256);
+    function getReserveNormalizedVariableDebt(address asset) external view returns (uint256);
 
   /**
    * @dev Returns the state and configuration of the reserve
    * @param asset The address of the underlying asset of the reserve
    * @return The state of the reserve
    **/
-  function getReserveData(address asset) external view returns (DataTypes.ReserveData memory);
+    function getReserveData(address asset) external view returns (DataTypes.ReserveData memory);
 
-  function finalizeTransfer(
-    address asset,
-    address from,
-    address to,
-    uint256 amount,
-    uint256 balanceFromAfter,
-    uint256 balanceToBefore
-  ) external;
+    function finalizeTransfer(
+        address asset,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 balanceFromAfter,
+        uint256 balanceToBefore
+    ) external;
 
-  function getReservesList() external view returns (address[] memory);
+    function getReservesList() external view returns (address[] memory);
 
-  function getAddressesProvider() external view returns (ILendingPoolAddressesProvider);
+    function getAddressesProvider() external view returns (ILendingPoolAddressesProvider);
 
-  function setPause(bool val) external;
+    function setPause(bool val) external;
 
-  function paused() external view returns (bool);
+    function paused() external view returns (bool);
 }
